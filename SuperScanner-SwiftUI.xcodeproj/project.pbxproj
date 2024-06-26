@@ -9,12 +9,18 @@
 /* Begin PBXBuildFile section */
 		65F791142C2C1CAA00DCEA64 /* SuperScanner_SwiftUI.docc in Sources */ = {isa = PBXBuildFile; fileRef = 65F791132C2C1CAA00DCEA64 /* SuperScanner_SwiftUI.docc */; };
 		65F791152C2C1CAA00DCEA64 /* SuperScanner_SwiftUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 65F791122C2C1CAA00DCEA64 /* SuperScanner_SwiftUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		65F7911D2C2C1CF100DCEA64 /* BarcodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7911C2C2C1CF100DCEA64 /* BarcodeScannerView.swift */; };
+		65F7911F2C2C1E9B00DCEA64 /* SuperScanner-SwiftUI.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 65F7911E2C2C1E9B00DCEA64 /* SuperScanner-SwiftUI.podspec */; };
+		65F791212C2C1EE400DCEA64 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F791202C2C1EE400DCEA64 /* Package.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		65F7910F2C2C1CAA00DCEA64 /* SuperScanner_SwiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SuperScanner_SwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		65F791122C2C1CAA00DCEA64 /* SuperScanner_SwiftUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuperScanner_SwiftUI.h; sourceTree = "<group>"; };
 		65F791132C2C1CAA00DCEA64 /* SuperScanner_SwiftUI.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = SuperScanner_SwiftUI.docc; sourceTree = "<group>"; };
+		65F7911C2C2C1CF100DCEA64 /* BarcodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerView.swift; sourceTree = "<group>"; };
+		65F7911E2C2C1E9B00DCEA64 /* SuperScanner-SwiftUI.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = "SuperScanner-SwiftUI.podspec"; sourceTree = "<group>"; };
+		65F791202C2C1EE400DCEA64 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,7 +37,9 @@
 		65F791052C2C1CAA00DCEA64 = {
 			isa = PBXGroup;
 			children = (
-				65F791112C2C1CAA00DCEA64 /* SuperScanner-SwiftUI */,
+				65F791202C2C1EE400DCEA64 /* Package.swift */,
+				65F7911E2C2C1E9B00DCEA64 /* SuperScanner-SwiftUI.podspec */,
+				65F7911B2C2C1CD200DCEA64 /* Sources */,
 				65F791102C2C1CAA00DCEA64 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -49,8 +57,17 @@
 			children = (
 				65F791122C2C1CAA00DCEA64 /* SuperScanner_SwiftUI.h */,
 				65F791132C2C1CAA00DCEA64 /* SuperScanner_SwiftUI.docc */,
+				65F7911C2C2C1CF100DCEA64 /* BarcodeScannerView.swift */,
 			);
 			path = "SuperScanner-SwiftUI";
+			sourceTree = "<group>";
+		};
+		65F7911B2C2C1CD200DCEA64 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				65F791112C2C1CAA00DCEA64 /* SuperScanner-SwiftUI */,
+			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -122,6 +139,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65F7911F2C2C1E9B00DCEA64 /* SuperScanner-SwiftUI.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +150,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65F791212C2C1EE400DCEA64 /* Package.swift in Sources */,
+				65F7911D2C2C1CF100DCEA64 /* BarcodeScannerView.swift in Sources */,
 				65F791142C2C1CAA00DCEA64 /* SuperScanner_SwiftUI.docc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -192,7 +212,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -252,7 +272,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -279,6 +299,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -312,6 +333,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
