@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		65F791142C2C1CAA00DCEA64 /* SuperScanner_SwiftUI.docc in Sources */ = {isa = PBXBuildFile; fileRef = 65F791132C2C1CAA00DCEA64 /* SuperScanner_SwiftUI.docc */; };
-		65F791152C2C1CAA00DCEA64 /* SuperScanner_SwiftUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 65F791122C2C1CAA00DCEA64 /* SuperScanner_SwiftUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		65F7911D2C2C1CF100DCEA64 /* BarcodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7911C2C2C1CF100DCEA64 /* BarcodeScannerView.swift */; };
 		65F7911F2C2C1E9B00DCEA64 /* SuperScanner-SwiftUI.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 65F7911E2C2C1E9B00DCEA64 /* SuperScanner-SwiftUI.podspec */; };
 		65F791212C2C1EE400DCEA64 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F791202C2C1EE400DCEA64 /* Package.swift */; };
@@ -16,8 +14,6 @@
 
 /* Begin PBXFileReference section */
 		65F7910F2C2C1CAA00DCEA64 /* SuperScanner_SwiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SuperScanner_SwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		65F791122C2C1CAA00DCEA64 /* SuperScanner_SwiftUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuperScanner_SwiftUI.h; sourceTree = "<group>"; };
-		65F791132C2C1CAA00DCEA64 /* SuperScanner_SwiftUI.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = SuperScanner_SwiftUI.docc; sourceTree = "<group>"; };
 		65F7911C2C2C1CF100DCEA64 /* BarcodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerView.swift; sourceTree = "<group>"; };
 		65F7911E2C2C1E9B00DCEA64 /* SuperScanner-SwiftUI.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = "SuperScanner-SwiftUI.podspec"; sourceTree = "<group>"; };
 		65F791202C2C1EE400DCEA64 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
@@ -52,20 +48,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		65F791112C2C1CAA00DCEA64 /* SuperScanner-SwiftUI */ = {
-			isa = PBXGroup;
-			children = (
-				65F791122C2C1CAA00DCEA64 /* SuperScanner_SwiftUI.h */,
-				65F791132C2C1CAA00DCEA64 /* SuperScanner_SwiftUI.docc */,
-				65F7911C2C2C1CF100DCEA64 /* BarcodeScannerView.swift */,
-			);
-			path = "SuperScanner-SwiftUI";
-			sourceTree = "<group>";
-		};
 		65F7911B2C2C1CD200DCEA64 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				65F791112C2C1CAA00DCEA64 /* SuperScanner-SwiftUI */,
+				65F7911C2C2C1CF100DCEA64 /* BarcodeScannerView.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -77,7 +63,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65F791152C2C1CAA00DCEA64 /* SuperScanner_SwiftUI.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,7 +137,6 @@
 			files = (
 				65F791212C2C1EE400DCEA64 /* Package.swift in Sources */,
 				65F7911D2C2C1CF100DCEA64 /* BarcodeScannerView.swift in Sources */,
-				65F791142C2C1CAA00DCEA64 /* SuperScanner_SwiftUI.docc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
