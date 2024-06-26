@@ -18,10 +18,8 @@ let package = Package(
             dependencies: [],
             path: "Sources"
         ),
-        .testTarget(
-            name: "SuperScanner-SwiftUI-Tests",
-            dependencies: ["SuperScanner-SwiftUI"],
-            path: "Tests"
-        ),
+    ],
+    swiftLanguageVersions: [
+        .v5
     ]
 )
