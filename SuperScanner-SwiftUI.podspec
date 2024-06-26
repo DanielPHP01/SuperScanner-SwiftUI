@@ -1,4 +1,3 @@
-
 Pod::Spec.new do |spec|
   spec.name         = "SuperScanner-SwiftUI"
   spec.version      = "1.0.0"
@@ -10,6 +9,7 @@ Pod::Spec.new do |spec|
   spec.source       = { :git => "https://github.com/DanielPHP01/SuperScanner-SwiftUI.git", :tag => "1.0.0" }
 
   spec.ios.deployment_target = "13.0"
+  spec.swift_versions = ["5.3"]
 
   spec.source_files = "Sources/**/*.{swift}"
 
