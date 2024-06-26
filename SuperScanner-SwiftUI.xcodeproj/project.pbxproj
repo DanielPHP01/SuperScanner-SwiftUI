@@ -51,9 +51,17 @@
 		65F7911B2C2C1CD200DCEA64 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				65F7911C2C2C1CF100DCEA64 /* BarcodeScannerView.swift */,
+				65F7913D2C2C244400DCEA64 /* SuperScanner-SwiftUI */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		65F7913D2C2C244400DCEA64 /* SuperScanner-SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				65F7911C2C2C1CF100DCEA64 /* BarcodeScannerView.swift */,
+			);
+			path = "SuperScanner-SwiftUI";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -1,11 +1,4 @@
-//
-//  Package.swift
-//  SuperScanner-SwiftUI
-//
-//  Created by daniel on 26/6/24.
-//
-
-// swift-tools-version:5.3
+// swift-tools-version:5.9
 import PackageDescription
 
 let package = Package(
@@ -32,4 +25,3 @@ let package = Package(
         ),
     ]
 )
-
