@@ -34,6 +34,7 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
         viewController.scanInterval = scanInterval
         return viewController
     }
+    //
 
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
 
