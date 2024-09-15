@@ -2,13 +2,24 @@ import SwiftUI
 import AVFoundation
 import Vision
 
-public struct BarcodeScannerView: UIViewControllerRepresentable {
+// Made by Daniel Almazbekov
+// Linkedin https://www.linkedin.com/in/almazbekov-daniel-mobiledeveloper/
+
+// MARK: - BarcodeScannerView
+/// A SwiftUI view that represents a barcode scanner using Vision and AVFoundation frameworks.
+public struct TestBarcodeScannerView: UIViewControllerRepresentable {
+    // MARK: - Bindings
     @Binding public var scannedCode: String?
     @Binding public var isShowingScanner: Bool?
     @Binding public var errorText: String?
     @Binding public var success: Bool?
+
+    // MARK: - Configuration Properties
     public var boxSize: CGSize = CGSize(width: 200, height: 200)
-    public var boxPosition: CGPoint = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2)
+    public var boxPosition: CGPoint = CGPoint(
+        x: UIScreen.main.bounds.width / 2,
+        y: UIScreen.main.bounds.height / 2
+    )
     public var boxColor: UIColor = .clear
     public var boxLineWidth: CGFloat = 0
     public var boxFillColor: UIColor = UIColor.clear
@@ -16,20 +27,26 @@ public struct BarcodeScannerView: UIViewControllerRepresentable {
     public var shouldVibrateOnSuccess: Bool = true
     public var outsideBoxAlpha: CGFloat = .zero
     public var scanInterval: TimeInterval = 1.0
-    
-    public init(scannedCode: Binding<String?>,
-                isShowingScanner: Binding<Bool?>,
-                errorText: Binding<String?>,
-                success: Binding<Bool?>,
-                boxSize: CGSize = CGSize(width: 200, height: 200),
-                boxPosition: CGPoint = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2),
-                boxColor: UIColor = .clear,
-                boxLineWidth: CGFloat = 0,
-                boxFillColor: UIColor = UIColor.clear,
-                supportedBarcodeTypes: [VNBarcodeSymbology] = [.qr, .ean13, .code128],
-                shouldVibrateOnSuccess: Bool = true,
-                outsideBoxAlpha: CGFloat = .zero,
-                scanInterval: TimeInterval = 1.0) {
+
+    // MARK: - Initializer
+    public init(
+        scannedCode: Binding<String?>,
+        isShowingScanner: Binding<Bool?>,
+        errorText: Binding<String?>,
+        success: Binding<Bool?>,
+        boxSize: CGSize = CGSize(width: 200, height: 200),
+        boxPosition: CGPoint = CGPoint(
+            x: UIScreen.main.bounds.width / 2,
+            y: UIScreen.main.bounds.height / 2
+        ),
+        boxColor: UIColor = .clear,
+        boxLineWidth: CGFloat = 0,
+        boxFillColor: UIColor = UIColor.clear,
+        supportedBarcodeTypes: [VNBarcodeSymbology] = [.qr, .ean13, .code128],
+        shouldVibrateOnSuccess: Bool = true,
+        outsideBoxAlpha: CGFloat = .zero,
+        scanInterval: TimeInterval = 1.0
+    ) {
         self._scannedCode = scannedCode
         self._isShowingScanner = isShowingScanner
         self._errorText = errorText
@@ -44,9 +61,11 @@ public struct BarcodeScannerView: UIViewControllerRepresentable {
         self.outsideBoxAlpha = outsideBoxAlpha
         self.scanInterval = scanInterval
     }
-    
+
+    // MARK: - UIViewControllerRepresentable Methods
     public func makeUIViewController(context: Context) -> UIViewController {
         let viewController = ScannerViewController()
+        // Passing bindings and configurations to the view controller
         viewController.scannedCodeBinding = $scannedCode
         viewController.isShowingScannerBinding = $isShowingScanner
         viewController.errorTextBinding = $errorText
@@ -62,10 +81,13 @@ public struct BarcodeScannerView: UIViewControllerRepresentable {
         viewController.scanInterval = scanInterval
         return viewController
     }
-    
+
     public func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
-    
+
+    // MARK: - ScannerViewController
+    /// A UIViewController that handles barcode scanning using AVFoundation and Vision.
     class ScannerViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
+        // MARK: - Properties
         var captureSession: AVCaptureSession!
         var previewLayer: AVCaptureVideoPreviewLayer!
         var centerBoxLayer: CAShapeLayer!
@@ -75,7 +97,10 @@ public struct BarcodeScannerView: UIViewControllerRepresentable {
         var errorTextBinding: Binding<String?>?
         var successBinding: Binding<Bool?>?
         var boxSize: CGSize = CGSize(width: 200, height: 200)
-        var boxPosition: CGPoint = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2)
+        var boxPosition: CGPoint = CGPoint(
+            x: UIScreen.main.bounds.width / 2,
+            y: UIScreen.main.bounds.height / 2
+        )
         var boxColor: UIColor = .red
         var boxLineWidth: CGFloat = 2
         var boxFillColor: UIColor = UIColor.clear
@@ -84,54 +109,85 @@ public struct BarcodeScannerView: UIViewControllerRepresentable {
         var outsideBoxAlpha: CGFloat = 0.5
         var scanInterval: TimeInterval = 1.0
         var lastScanDate: Date = Date()
-        
+        var isSessionRunning = false
+
+        // MARK: - Lifecycle Methods
         override public func viewDidLoad() {
             super.viewDidLoad()
-            
+            setupCaptureSession()
+            setupPreviewLayer()
+            setupCenterBox()
+            setupOutsideBox()
+            addObservers()
+        }
+
+        override public func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+            startSession()
+        }
+
+        override public func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+            stopSession()
+        }
+
+        deinit {
+            NotificationCenter.default.removeObserver(self)
+        }
+
+        // MARK: - Setup Methods
+        /// Configures the capture session.
+        func setupCaptureSession() {
             captureSession = AVCaptureSession()
             guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {
-                errorTextBinding?.wrappedValue = "Error accessing camera: Device not found."
+                errorTextBinding?.wrappedValue = "Error accessing camera: device not found."
                 successBinding?.wrappedValue = false
                 return
             }
-            let videoInput: AVCaptureDeviceInput
-            
+
             do {
-                videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
+                let videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
+                if captureSession.canAddInput(videoInput) {
+                    captureSession.addInput(videoInput)
+                } else {
+                    errorTextBinding?.wrappedValue = "Unable to add input to capture session"
+                    successBinding?.wrappedValue = false
+                    return
+                }
             } catch {
                 errorTextBinding?.wrappedValue = "Error accessing camera: \(error.localizedDescription)"
                 successBinding?.wrappedValue = false
                 return
             }
-            
-            if (captureSession.canAddInput(videoInput)) {
-                captureSession.addInput(videoInput)
+
+            let videoOutput = AVCaptureVideoDataOutput()
+            videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "videoQueue"))
+            if captureSession.canAddOutput(videoOutput) {
+                captureSession.addOutput(videoOutput)
             } else {
-                errorTextBinding?.wrappedValue = "Unable to add input to capture session"
+                errorTextBinding?.wrappedValue = "Unable to add output to capture session"
                 successBinding?.wrappedValue = false
                 return
             }
-            
-            let videoOutput = AVCaptureVideoDataOutput()
-            videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "videoQueue"))
-            captureSession.addOutput(videoOutput)
-            
+        }
+
+        /// Sets up the preview layer to display the camera feed.
+        func setupPreviewLayer() {
             previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
             previewLayer.frame = view.layer.bounds
             previewLayer.videoGravity = .resizeAspectFill
-            view.layer.addSublayer(previewLayer)
-            
-            setupCenterBox()
-            setupOutsideBox()
-            
-            captureSession.startRunning()
+            view.layer.insertSublayer(previewLayer, at: 0)
         }
-        
+
+        /// Draws the center scanning box.
         func setupCenterBox() {
-            let centerBox = CGRect(x: boxPosition.x - (boxSize.width / 2),
-                                   y: boxPosition.y - (boxSize.height / 2),
-                                   width: boxSize.width, height: boxSize.height)
-            
+            let centerBox = CGRect(
+                x: boxPosition.x - (boxSize.width / 2),
+                y: boxPosition.y - (boxSize.height / 2),
+                width: boxSize.width,
+                height: boxSize.height
+            )
+
             centerBoxLayer = CAShapeLayer()
             centerBoxLayer.path = UIBezierPath(rect: centerBox).cgPath
             centerBoxLayer.strokeColor = boxColor.cgColor
@@ -139,89 +195,149 @@ public struct BarcodeScannerView: UIViewControllerRepresentable {
             centerBoxLayer.lineWidth = boxLineWidth
             view.layer.addSublayer(centerBoxLayer)
         }
-        
+
+        /// Shades the area outside the center box.
         func setupOutsideBox() {
             let fullRect = view.bounds
-            let centerBox = CGRect(x: boxPosition.x - (boxSize.width / 2),
-                                   y: boxPosition.y - (boxSize.height / 2),
-                                   width: boxSize.width, height: boxSize.height)
-            
+            let centerBox = CGRect(
+                x: boxPosition.x - (boxSize.width / 2),
+                y: boxPosition.y - (boxSize.height / 2),
+                width: boxSize.width,
+                height: boxSize.height
+            )
+
             let path = UIBezierPath(rect: fullRect)
             let transparentPath = UIBezierPath(rect: centerBox).reversing()
             path.append(transparentPath)
-            
+
             outsideBoxLayer = CAShapeLayer()
             outsideBoxLayer.path = path.cgPath
             outsideBoxLayer.fillColor = UIColor.black.withAlphaComponent(outsideBoxAlpha).cgColor
             view.layer.addSublayer(outsideBoxLayer)
         }
-        
-        public func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+
+        /// Adds observers for app lifecycle events.
+        func addObservers() {
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(appDidEnterBackground),
+                name: UIApplication.didEnterBackgroundNotification,
+                object: nil
+            )
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(appWillEnterForeground),
+                name: UIApplication.willEnterForegroundNotification,
+                object: nil
+            )
+        }
+
+        // MARK: - Session Control Methods
+        /// Starts the capture session.
+        func startSession() {
+            if !captureSession.isRunning && !isSessionRunning {
+                DispatchQueue.global(qos: .userInitiated).async {
+                    self.captureSession.startRunning()
+                    self.isSessionRunning = true
+                }
+            }
+        }
+
+        /// Stops the capture session.
+        func stopSession() {
+            if captureSession.isRunning && isSessionRunning {
+                DispatchQueue.global(qos: .userInitiated).async {
+                    self.captureSession.stopRunning()
+                    self.isSessionRunning = false
+                }
+            }
+        }
+
+        // MARK: - App Lifecycle Handlers
+        @objc func appDidEnterBackground() {
+            stopSession()
+        }
+
+        @objc func appWillEnterForeground() {
+            if isViewLoaded && view.window != nil {
+                startSession()
+            }
+        }
+
+        // MARK: - AVCaptureVideoDataOutputSampleBufferDelegate
+        /// Processes the captured video frames.
+        public func captureOutput(
+            _ output: AVCaptureOutput,
+            didOutput sampleBuffer: CMSampleBuffer,
+            from connection: AVCaptureConnection
+        ) {
             let currentDate = Date()
+            // Throttle scanning to prevent excessive processing.
             if currentDate.timeIntervalSince(lastScanDate) < scanInterval {
                 return
             }
-            
+
             guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
-                errorTextBinding?.wrappedValue = "Error getting image buffer from sample buffer"
+                errorTextBinding?.wrappedValue = "Error getting image from buffer"
                 successBinding?.wrappedValue = false
                 return
             }
-            
+
             let request = VNDetectBarcodesRequest { (request, error) in
                 if let error = error {
                     self.errorTextBinding?.wrappedValue = "Barcode detection error: \(error.localizedDescription)"
                     self.successBinding?.wrappedValue = false
                     return
                 }
-                
-                if let results = request.results as? [VNBarcodeObservation] {
+
+                if let results = request.results as? [VNBarcodeObservation], !results.isEmpty {
                     for result in results {
                         if self.supportedBarcodeTypes.contains(result.symbology) {
                             DispatchQueue.main.async {
                                 self.handleBarcodeObservation(result)
                             }
+                            break // Stop after handling the first supported barcode.
                         }
                     }
-                } else {
-                    self.errorTextBinding?.wrappedValue = "No barcode observations found"
-                    self.successBinding?.wrappedValue = false
                 }
             }
-            
+
             let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:])
             do {
                 try handler.perform([request])
             } catch {
-                errorTextBinding?.wrappedValue = "Failed to perform barcode request: \(error.localizedDescription)"
+                errorTextBinding?.wrappedValue = "Failed to perform recognition request: \(error.localizedDescription)"
                 successBinding?.wrappedValue = false
             }
         }
-        
+
+        // MARK: - Barcode Handling
+        /// Handles the barcode observation result.
         func handleBarcodeObservation(_ observation: VNBarcodeObservation) {
+            guard let payload = observation.payloadStringValue else {
+                errorTextBinding?.wrappedValue = "Barcode does not contain data"
+                successBinding?.wrappedValue = false
+                return
+            }
+
             let barcodeBounds = previewLayer.layerRectConverted(fromMetadataOutputRect: observation.boundingBox)
-            
-            let scanZoneRect = CGRect(x: boxPosition.x - boxSize.width / 2,
-                                      y: boxPosition.y - boxSize.height / 2,
-                                      width: boxSize.width,
-                                      height: boxSize.height)
-            
-            if scanZoneRect.contains(barcodeBounds.origin) && scanZoneRect.contains(CGPoint(x: barcodeBounds.maxX, y: barcodeBounds.maxY)) {
+            let scanZoneRect = CGRect(
+                x: boxPosition.x - boxSize.width / 2,
+                y: boxPosition.y - boxSize.height / 2,
+                width: boxSize.width,
+                height: boxSize.height
+            )
+
+            if scanZoneRect.contains(barcodeBounds.origin) &&
+                scanZoneRect.contains(CGPoint(x: barcodeBounds.maxX, y: barcodeBounds.maxY)) {
                 lastScanDate = Date()
-                scannedCodeBinding?.wrappedValue = observation.payloadStringValue
+                scannedCodeBinding?.wrappedValue = payload
                 successBinding?.wrappedValue = true
                 if shouldVibrateOnSuccess {
                     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
                 }
                 isShowingScannerBinding?.wrappedValue = false
-                print(observation.payloadStringValue ?? "No barcode value")
             }
-        }
-        
-        override public func viewWillDisappear(_ animated: Bool) {
-            super.viewWillDisappear(animated)
-            captureSession.stopRunning()
         }
     }
 }
-
