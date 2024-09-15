@@ -28,7 +28,7 @@ SuperScanner-SwiftUI is a customizable SwiftUI component for scanning barcodes a
 Add the following line to your Podfile:
 
 ```ruby
-pod 'SuperScanner-SwiftUI', '~> 1.1.0'
+pod 'SuperScanner-SwiftUI', '~> 1.1.1'
 ```
 
 Then run:
@@ -46,7 +46,7 @@ pod install
    https://github.com/DanielPHP01/SuperScanner-SwiftUI.git
    ```
 
-3. Choose version **1.1.0** or later.
+3. Choose version **1.1.1** or later.
 
 ## Usage
 
