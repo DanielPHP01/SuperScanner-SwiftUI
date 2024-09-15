@@ -273,6 +273,7 @@ public struct BarcodeScannerView: UIViewControllerRepresentable {
         ) {
             let currentDate = Date()
             // Throttle scanning to prevent excessive processing.
+            
             if currentDate.timeIntervalSince(lastScanDate) < scanInterval {
                 return
             }
