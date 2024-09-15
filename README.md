@@ -1,6 +1,9 @@
 
 # SuperScanner-SwiftUI
 
+[https://yourimageurl.com/scanning_interface.png](https://raw.githubusercontent.com/DanielPHP01/SuperScanner-SwiftUI/main/image.webp))
+
+
 **Made by Daniel Almazbekov**
 
 ## Description
@@ -129,15 +132,3 @@ SuperScanner-SwiftUI is distributed under the MIT License. See the LICENSE file 
 ## Contributions
 
 Any suggestions and improvements are welcome! Please create an issue or submit a pull request to the repository.
-
-## Screenshots
-
-![Scanning Interface](https://yourimageurl.com/scanning_interface.png)
-*Figure 1: Scanning Interface*
-
-![Successful Scan Result](https://yourimageurl.com/successful_scan.png)
-*Figure 2: Successful Scan Result*
-
----
-
-**Note:** Please replace the placeholder image URLs (`https://yourimageurl.com/...`) with the actual URLs of your images.
