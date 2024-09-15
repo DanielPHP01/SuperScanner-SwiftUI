@@ -7,7 +7,7 @@ import Vision
 
 // MARK: - BarcodeScannerView
 /// A SwiftUI view that represents a barcode scanner using Vision and AVFoundation frameworks.
-public struct TestBarcodeScannerView: UIViewControllerRepresentable {
+public struct BarcodeScannerView: UIViewControllerRepresentable {
     // MARK: - Bindings
     @Binding public var scannedCode: String?
     @Binding public var isShowingScanner: Bool?
