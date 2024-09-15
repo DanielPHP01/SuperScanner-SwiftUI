@@ -2,7 +2,7 @@ import SwiftUI
 import AVFoundation
 import Vision
 
-// Made by Daniel Almazbekov
+// Made by Daniel Almazbekov 2024
 // Linkedin https://www.linkedin.com/in/almazbekov-daniel-mobiledeveloper/
 
 // MARK: - BarcodeScannerView
