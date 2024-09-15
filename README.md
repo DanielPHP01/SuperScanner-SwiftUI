@@ -2,7 +2,7 @@
 # SuperScanner-SwiftUI
 
 
-![SuperScanner-SwiftUI Logo](https://yourimageurl.com/scanning_interface.png](https://raw.githubusercontent.com/DanielPHP01/SuperScanner-SwiftUI/main/image.webp)
+![SuperScanner-SwiftUI Logo](https://raw.githubusercontent.com/DanielPHP01/SuperScanner-SwiftUI/main/image.webp)
 
 
 
