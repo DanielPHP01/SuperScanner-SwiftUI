@@ -1,23 +1,24 @@
-SuperScanner-SwiftUI
 
-Made by Daniel Almazbekov
+# SuperScanner-SwiftUI
 
-Description
+**Made by Daniel Almazbekov**
+
+## Description
 
 SuperScanner-SwiftUI is a customizable SwiftUI component for scanning barcodes and QR codes using the AVFoundation and Vision frameworks. It allows you to easily integrate scanning functionality into your app with minimal effort.
 
-Features
+## Features
 
-• Supports various barcode types: QR, EAN-13, Code128, and more.
-• Customizable scanning area: Adjust the size and position of the scanning window.
-• Vibration on successful scan: Optionally enables device vibration upon code detection.
-• Automatic session management: The scanning session automatically pauses during transitions or when alerts are displayed and resumes upon returning.
-• Easy integration: Add to your project effortlessly using CocoaPods or Swift Package Manager.
-• Built entirely in SwiftUI: Ideal for modern SwiftUI applications.
+- Supports various barcode types: QR, EAN-13, Code128, and more.
+- Customizable scanning area: Adjust the size and position of the scanning window.
+- Vibration on successful scan: Optionally enables device vibration upon code detection.
+- Automatic session management: The scanning session automatically pauses during transitions or when alerts are displayed and resumes upon returning.
+- Easy integration: Add to your project effortlessly using CocoaPods or Swift Package Manager.
+- Built entirely in SwiftUI: Ideal for modern SwiftUI applications.
 
-Installation
+## Installation
 
-CocoaPods
+### CocoaPods
 
 Add the following line to your Podfile:
 
@@ -25,20 +26,26 @@ Add the following line to your Podfile:
 pod 'SuperScanner-SwiftUI', '~> 1.1.0'
 ```
 
+Then run:
+
 ```bash
 pod install
 ```
 
-Swift Package Manager
+### Swift Package Manager
 
-1.	In Xcode, go to File > Swift Packages > Add Package Dependency.
-2.	Enter the repository URL:
-```
-https://github.com/DanielPHP01/SuperScanner-SwiftUI.git
-```
-Choose version 1.1.0 or later.
+1. In Xcode, go to **File > Swift Packages > Add Package Dependency**.
+2. Enter the repository URL:
 
-```
+   ```
+   https://github.com/DanielPHP01/SuperScanner-SwiftUI.git
+   ```
+
+3. Choose version **1.1.0** or later.
+
+## Usage
+
+```swift
 import SwiftUI
 import SuperScanner_SwiftUI
 
@@ -87,45 +94,50 @@ struct ContentView: View {
 }
 ```
 
+## Customization
 
-Customization
+**BarcodeScannerView** supports various parameters for customization:
 
-BarcodeScannerView supports various parameters for customization:
+| Parameter                | Type                   | Description                                                              |
+|--------------------------|------------------------|--------------------------------------------------------------------------|
+| `boxSize`                | `CGSize`               | Size of the scanning area.                                               |
+| `boxPosition`            | `CGPoint`              | Position of the scanning area on the screen.                             |
+| `boxColor`               | `UIColor`              | Color of the scanning area’s border.                                     |
+| `boxLineWidth`           | `CGFloat`              | Width of the border line.                                                |
+| `boxFillColor`           | `UIColor`              | Fill color of the scanning area.                                         |
+| `supportedBarcodeTypes`  | `[VNBarcodeSymbology]` | An array of supported barcode types.                                     |
+| `shouldVibrateOnSuccess` | `Bool`                 | Enable vibration on successful scan.                                     |
+| `outsideBoxAlpha`        | `CGFloat`              | Transparency of the shaded area outside the scanning zone.               |
+| `scanInterval`           | `TimeInterval`         | Interval between scans to prevent multiple triggers.                     |
 
-	•	boxSize: Size of the scanning area.
-	•	boxPosition: Position of the scanning area on the screen.
-	•	boxColor: Color of the scanning area’s border.
-	•	boxLineWidth: Width of the border line.
-	•	boxFillColor: Fill color of the scanning area.
-	•	supportedBarcodeTypes: An array of supported barcode types.
-	•	shouldVibrateOnSuccess: Enable vibration on successful scan.
-	•	outsideBoxAlpha: Transparency of the shaded area outside the scanning zone.
-	•	scanInterval: Interval between scans to prevent multiple triggers.
+## Requirements
 
-Requirements
+- iOS 13.0 or later
+- Swift 5.3 or later
 
-•	iOS 13.0 or later
-•	Swift 5.3 or later
-
-License
+## License
 
 SuperScanner-SwiftUI is distributed under the MIT License. See the LICENSE file for more information.
 
-Author
+## Author
 
-Daniel Almazbekov
+**Daniel Almazbekov**
 
-•	Email: danielalmazbekov01@icloud.com
-•	GitHub: DanielPHP01
+- Email: [danielalmazbekov01@icloud.com](mailto:danielalmazbekov01@icloud.com)
+- GitHub: [DanielPHP01](https://github.com/DanielPHP01)
 
-Contributions
+## Contributions
 
 Any suggestions and improvements are welcome! Please create an issue or submit a pull request to the repository.
 
+## Screenshots
 
+![Scanning Interface](https://yourimageurl.com/scanning_interface.png)
+*Figure 1: Scanning Interface*
 
+![Successful Scan Result](https://yourimageurl.com/successful_scan.png)
+*Figure 2: Successful Scan Result*
 
+---
 
-
-
-
+**Note:** Please replace the placeholder image URLs (`https://yourimageurl.com/...`) with the actual URLs of your images.
